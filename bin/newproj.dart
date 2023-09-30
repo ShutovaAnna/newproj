@@ -10,10 +10,6 @@ void main(List<String> arguments) async {
 
   List<dynamic> products = jsonData['products'];
 
-  for (dynamic p in products) {
-    print(p['title']);
-  }
-
   double sum = 0.0;
 
   products.forEach((p) {
