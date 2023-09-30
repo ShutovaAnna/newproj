@@ -1,5 +1,25 @@
-import 'package:newproj/newproj.dart' as newproj;
+import 'package:dio/dio.dart';
 
-void main(List<String> arguments) {
-  print('Hello world: ${newproj.calculate()}!');
+void main(List<String> arguments) async {
+  String url = 'https://dummyjson.com/products';
+  Dio client = Dio();
+
+  final response = await client.get(url);
+
+  Map<String, dynamic> jsonData = response.data;
+
+  List<dynamic> products = jsonData['products'];
+
+  for (dynamic p in products) {
+    print(p['title']);
+  }
+
+  double sum = 0.0;
+
+  products.forEach((p) {
+    var rating = p['rating'];
+    sum += rating;
+  });
+  double average = sum / products.length;
+  print('average rating: $average');
 }
